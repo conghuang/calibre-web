@@ -1,0 +1,33 @@
+version: "3.9"
+
+networks:
+  default:
+    name: traefik_net
+    external: true
+services:
+  calibre-web:
+    container_name: calibre-web
+    # image: johngong/calibre-web:latest
+    image: huangcong/calibre-web:Develop
+    ports:
+      - "3383:8083"
+    volumes:
+      - ./config:/config
+      - ./books:/library:rw
+      - ./autoaddbooks:/autoaddbooks
+      - ./metadata_provider:/app/calibre-web/cps/metadata_provider
+    environment:
+      # - CALIBRE_SERVER_USER=
+      # - CALIBRE_SERVER_PASSWORD=
+      # - CALIBRE_ASCII_FILENAME=false
+    labels:
+      - traefik.http.routers.www-calibre.rule=Host(`book.huangcong.com`)
+      - traefik.http.routers.www-calibre.tls=true
+      - traefik.http.routers.www-calibre.service=www-calibre
+      - traefik.http.services.www-calibre.loadbalancer.server.port=8083
+      # - traefik.http.routers.admin-calibre.rule=Host(`books.huangcong.com`)
+      # - traefik.http.routers.admin-calibre.tls=true
+      # - traefik.http.routers.admin-calibre.service=admin-calibre
+      # - traefik.http.services.admin-calibre.loadbalancer.server.port=8080
+    restart: always
+
