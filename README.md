@@ -9,4 +9,5 @@ calibre-web在大陆能通过编译的Dockerfile
 1. Calibre 电子书转换器路径：/app/calibre/ebook-convert
 1. KEpubify 电子书转换器路径：/usr/bin/kepubify
 1. Unrar 程序路径：/usr/bin/unrar
-
+1. Dockerfile地址：https://github.com/conghuang/calibre-web
+1. DockerHub地址：https://hub.docker.com/repository/docker/huangcong/calibre-web
